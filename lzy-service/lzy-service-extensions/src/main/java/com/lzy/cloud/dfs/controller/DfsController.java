@@ -1,0 +1,181 @@
+package com.lzy.cloud.dfs.controller;
+
+
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.lzy.cloud.dfs.dto.CreateDfsDTO;
+import com.lzy.cloud.dfs.dto.DfsDTO;
+import com.lzy.cloud.dfs.dto.QueryDfsDTO;
+import com.lzy.cloud.dfs.dto.UpdateDfsDTO;
+import com.lzy.cloud.dfs.entity.SysDfs;
+import com.lzy.cloud.dfs.service.IDfsService;
+import com.lzy.platform.base.constant.LzyCloudConstant;
+import com.lzy.platform.base.dto.CheckExistDTO;
+import com.lzy.platform.base.result.Result;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
+import org.springframework.util.CollectionUtils;
+import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+
+/**
+ * 分布式存储配置表 前端控制器
+ *
+ * @author lizuoyang
+ * @date 2023/08/03
+ */
+@RestController
+@RequestMapping("/extension/dfs")
+@RequiredArgsConstructor(onConstructor_ = @Autowired)
+@Api(value = "DfsController|分布式存储配置表前端控制器", tags = {"分布式存储配置"})
+@RefreshScope
+public class DfsController {
+
+    private final IDfsService dfsService;
+
+    /**
+    * 查询分布式存储配置表列表
+    */
+    @GetMapping("/list")
+    @ApiOperation(value = "查询分布式存储配置表列表")
+    public Result<Page<DfsDTO>> list(QueryDfsDTO queryDfsDTO, Page<DfsDTO> page) {
+        Page<DfsDTO> pageDfs = dfsService.queryDfsList(page, queryDfsDTO);
+        return Result.data(pageDfs);
+    }
+
+    /**
+    * 查询分布式存储配置表详情
+    */
+    @GetMapping("/query")
+    @ApiOperation(value = "查询分布式存储配置表详情")
+    public Result<?> query(QueryDfsDTO queryDfsDTO) {
+        DfsDTO dfsDTO = dfsService.queryDfs(queryDfsDTO);
+        return Result.data(dfsDTO);
+    }
+
+    /**
+    * 添加分布式存储配置表
+    */
+    @PostMapping("/create")
+    @ApiOperation(value = "添加分布式存储配置表")
+    public Result<?> create(@RequestBody CreateDfsDTO dfs) {
+        boolean result = dfsService.createDfs(dfs);
+        return Result.result(result);
+    }
+
+    /**
+    * 修改分布式存储配置表
+    */
+    @PostMapping("/update")
+    @ApiOperation(value = "更新分布式存储配置表")
+    public Result<?> update(@RequestBody UpdateDfsDTO dfs) {
+        boolean result = dfsService.updateDfs(dfs);
+        return Result.result(result);
+    }
+
+    /**
+    * 删除分布式存储配置表
+    */
+    @PostMapping("/delete/{dfsId}")
+    @ApiOperation(value = "删除分布式存储配置表")
+    @ApiImplicitParam(paramType = "path", name = "dfsId", value = "分布式存储配置表ID", required = true, dataTypeClass = Long.class)
+    public Result<?> delete(@PathVariable("dfsId") Long dfsId) {
+        if (null == dfsId) {
+            return Result.error("ID不能为空");
+        }
+        boolean result = dfsService.deleteDfs(dfsId);
+        return Result.result(result);
+    }
+
+    /**
+    * 批量删除分布式存储配置表
+    */
+    @PostMapping("/batch/delete")
+    @ApiOperation(value = "批量删除分布式存储配置表")
+    @ApiImplicitParam(name = "dfsIds", value = "分布式存储配置表ID列表", required = true, dataTypeClass = List.class)
+    public Result<?> batchDelete(@RequestBody List<Long> dfsIds) {
+        if (CollectionUtils.isEmpty(dfsIds)) {
+            return Result.error("分布式存储配置表ID列表不能为空");
+        }
+        boolean result = dfsService.batchDeleteDfs(dfsIds);
+        return Result.result(result);
+    }
+
+    /**
+    * 修改分布式存储配置表状态
+    */
+    @PostMapping("/status/{dfsId}/{dfsStatus}")
+    @ApiOperation(value = "修改分布式存储配置表状态")
+    @ApiImplicitParams({
+    @ApiImplicitParam(name = "dfsId", value = "分布式存储配置表ID", required = true, dataTypeClass = Long.class, paramType = "path"),
+    @ApiImplicitParam(name = "dfsStatus", value = "分布式存储配置表状态", required = true, dataTypeClass = Integer.class, paramType = "path") })
+    public Result<?> updateStatus(@PathVariable("dfsId") Long dfsId,
+            @PathVariable("dfsStatus") Integer dfsStatus) {
+        if (null == dfsId || StringUtils.isEmpty(dfsStatus)) {
+            return Result.error("ID和状态不能为空");
+        }
+        UpdateDfsDTO dfs = new UpdateDfsDTO();
+        dfs.setId(dfsId);
+        dfs.setDfsStatus(dfsStatus);
+        boolean result = dfsService.updateDfs(dfs);
+        return Result.result(result);
+    }
+
+    /**
+     * 修改分布式存储配置为默认
+     */
+    @PostMapping("/default/{dfsId}")
+    @ApiOperation(value = "修改分布式存储配置为默认")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "dfsId", value = "分布式存储配置表ID", required = true, dataTypeClass = Long.class, paramType = "path")})
+    public Result<?> updateDefaultResult(@PathVariable("dfsId") Long dfsId) {
+        if (null == dfsId) {
+            return Result.error("ID不能为空");
+        }
+        boolean result = dfsService.updateDfsDefault(dfsId);
+        return Result.result(result);
+    }
+
+    /**
+    * 校验分布式存储配置表是否存在
+    *
+    * @param dfs
+    * @return
+    */
+    @PostMapping(value = "/check")
+    @ApiOperation(value = "校验分布式存储配置表是否存在", notes = "校验分布式存储配置表是否存在")
+    public Result<Boolean> checkDfsExist(@RequestBody CheckExistDTO dfs) {
+        String field = dfs.getCheckField();
+        String value = dfs.getCheckValue();
+        QueryWrapper<SysDfs> dfsQueryWrapper = new QueryWrapper<>();
+        dfsQueryWrapper.eq(field, value);
+        if(null != dfs.getId()) {
+            dfsQueryWrapper.ne("id", dfs.getId());
+        }
+        long count = dfsService.count(dfsQueryWrapper);
+        if (LzyCloudConstant.COUNT_ZERO == count){
+            return Result.data(true);
+        } else{
+            return Result.data(false);
+        }
+    }
+
+    /**
+     * 查询分布式存储配置的默认配置
+     * 有公开的图片，有私有的图片
+     */
+    @GetMapping("/query/default")
+    @ApiOperation(value = "查询分布式存储配置表详情")
+    public Result<?> queryDefaultConfig(QueryDfsDTO queryDfsDTO) {
+        DfsDTO dfsDTO = dfsService.queryDefaultDfs(queryDfsDTO);
+        return Result.data(dfsDTO);
+    }
+ }

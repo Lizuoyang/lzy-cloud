@@ -1,0 +1,8 @@
+server.name: kibana
+server.host: "0.0.0.0"
+elasticsearch.hosts: ["http://172.17.0.8:9200"]
+xpack.monitoring.ui.container.elasticsearch.enabled: true
+i18n.locale: "zh-CN"
+# 此处设置elastic的用户名和密码
+elasticsearch.username: "kibana_system"
+elasticsearch.password: "123456"

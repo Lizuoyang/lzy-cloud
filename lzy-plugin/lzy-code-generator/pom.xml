@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>lzy-plugin</artifactId>
+        <groupId>com.lzy.cloud</groupId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>lzy-code-generator</artifactId>
+    <name>${project.artifactId}</name>
+    <description>集成mybatis-plus-generator-ui，通过图形化界面生成数据库实体、service、controller等</description>
+    <packaging>jar</packaging>
+
+    <dependencies>
+        <!-- Flyway  数据库版本管理工具 -->
+        <dependency>
+            <groupId>com.lzy.platform</groupId>
+            <artifactId>lzy-platform-flyway</artifactId>
+            <version>${lzy.project.version}</version>
+        </dependency>
+        <!-- 图形化界面生成数据库代码 -->
+        <dependency>
+            <groupId>com.lzy.platform</groupId>
+            <artifactId>lzy-platform-code-generator</artifactId>
+            <version>${lzy.project.version}</version>
+        </dependency>
+        <!-- lzy springboot 拓展-->
+        <dependency>
+            <groupId>com.lzy.platform</groupId>
+            <artifactId>lzy-platform-springboot</artifactId>
+            <version>${lzy.project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.lzy.platform</groupId>
+            <artifactId>lzy-platform-springcloud</artifactId>
+            <version>${lzy.project.version}</version>
+        </dependency>
+    </dependencies>
+
+
+
+
+</project>

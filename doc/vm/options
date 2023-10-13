@@ -1,0 +1,3 @@
+VM options：-Dlog4j.skipJansi=false -javaagent:E:\DevlopSoftWare\apache-skywalking-java-agent-8.9.0\skywalking-agent\skywalking-agent.jar
+Program arguments: -Dskywalking.agent.service_name=Your Service Name
+Enviroment variables：-Dskywalking.collector.backend_service=127.0.0.1:11800

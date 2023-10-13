@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>lzy-cloud</artifactId>
+        <groupId>com.lzy.cloud</groupId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>lzy-service</artifactId>
+    <name>${project.artifactId}</name>
+    <packaging>pom</packaging>
+    <description>业务逻辑处理模块</description>
+    <modules>
+        <module>lzy-service-base</module>
+        <module>lzy-service-system</module>
+        <module>lzy-service-extensions</module>
+    </modules>
+
+    <dependencies>
+        <!-- lzy数据库驱动及连接池 -->
+        <dependency>
+            <groupId>com.lzy.platform</groupId>
+            <artifactId>lzy-platform-db</artifactId>
+            <version>${lzy.project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.lzy.platform</groupId>
+            <artifactId>lzy-platform-cache</artifactId>
+            <version>${lzy.project.version}</version>
+        </dependency>
+        <!-- lzy mybatis-plus -->
+        <dependency>
+            <groupId>com.lzy.platform</groupId>
+            <artifactId>lzy-platform-mybatis</artifactId>
+            <version>${lzy.project.version}</version>
+        </dependency>
+        <!-- lzy swagger -->
+        <dependency>
+            <groupId>com.lzy.platform</groupId>
+            <artifactId>lzy-platform-swagger2</artifactId>
+            <version>${lzy.project.version}</version>
+        </dependency>
+        <!-- lzy springboot 拓展-->
+        <dependency>
+            <groupId>com.lzy.platform</groupId>
+            <artifactId>lzy-platform-springboot</artifactId>
+            <version>${lzy.project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.lzy.platform</groupId>
+            <artifactId>lzy-platform-springcloud</artifactId>
+            <version>${lzy.project.version}</version>
+        </dependency>
+        <!-- spring boot web核心包 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <!-- spring boot 健康监控 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+    </dependencies>
+
+
+</project>

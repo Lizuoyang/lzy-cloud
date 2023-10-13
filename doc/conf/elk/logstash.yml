@@ -1,0 +1,6 @@
+http.host: "0.0.0.0"
+xpack.monitoring.elasticsearch.hosts: [ "http://172.17.0.8:9200" ]
+xpack.monitoring.elasticsearch.username: "elastic"
+xpack.monitoring.elasticsearch.password: "123456"
+path.config: /usr/share/logstash/conf.d/*.conf
+path.logs: /var/log/logstash

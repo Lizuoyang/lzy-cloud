@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>lzy-cloud</artifactId>
+        <groupId>com.lzy.cloud</groupId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>lzy-oauth</artifactId>
+    <name>${project.artifactId}</name>
+    <description>权限认证</description>
+    <packaging>jar</packaging>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+            <!-- 去除springboot默认的logback配置-->
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <!-- springboot -->
+        <dependency>
+            <groupId>com.lzy.platform</groupId>
+            <artifactId>lzy-platform-springboot</artifactId>
+            <version>${lzy.project.version}</version>
+        </dependency>
+        <!-- springcloud-->
+        <dependency>
+            <groupId>com.lzy.platform</groupId>
+            <artifactId>lzy-platform-springcloud</artifactId>
+            <version>${lzy.project.version}</version>
+        </dependency>
+        <!-- oauth2 -->
+        <dependency>
+            <groupId>com.lzy.platform</groupId>
+            <artifactId>lzy-platform-oauth2</artifactId>
+            <version>${lzy.project.version}</version>
+        </dependency>
+        <!-- 数据库连接池 -->
+        <dependency>
+            <groupId>com.lzy.platform</groupId>
+            <artifactId>lzy-platform-db</artifactId>
+            <version>${lzy.project.version}</version>
+        </dependency>
+        <!-- mybatis-plus -->
+        <dependency>
+            <groupId>com.lzy.platform</groupId>
+            <artifactId>lzy-platform-mybatis</artifactId>
+            <version>${lzy.project.version}</version>
+        </dependency>
+        <!-- 验证码 -->
+        <dependency>
+            <groupId>com.lzy.platform</groupId>
+            <artifactId>lzy-platform-captcha</artifactId>
+            <version>${lzy.project.version}</version>
+        </dependency>
+        <!-- lzy-service-system 统一feign调用方法-->
+        <dependency>
+            <groupId>com.lzy.cloud</groupId>
+            <artifactId>lzy-service-system-api</artifactId>
+            <version>${lzy.project.version}</version>
+        </dependency>
+        <!-- lzy-service-system 统一feign调用方法-->
+        <dependency>
+            <groupId>com.lzy.cloud</groupId>
+            <artifactId>lzy-service-extensions-api</artifactId>
+            <version>${lzy.project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.tomcat.embed</groupId>
+            <artifactId>tomcat-embed-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
+    </dependencies>
+
+
+</project>
