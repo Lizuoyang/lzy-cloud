@@ -14,6 +14,7 @@
         <module>lzy-gateway</module>
         <module>lzy-service</module>
         <module>lzy-service-api</module>
+        <module>lzy-register</module>
     </modules>
 
     <properties>
