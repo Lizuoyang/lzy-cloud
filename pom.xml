@@ -12,7 +12,6 @@
         <module>lzy-common</module>
         <module>lzy-oauth</module>
         <module>lzy-gateway</module>
-        <module>lzy-plugin</module>
         <module>lzy-service</module>
         <module>lzy-service-api</module>
     </modules>
